@@ -1,17 +1,12 @@
 # Проект 4: Место
 
-### Обзор
+### Применяемые технологии
 
-* Figma
-* Картинки
+* HTML
+* CSS
+* JS
 
-**Figma**
+**MESTO**
 
-* [Ссылка на макет в Figma](https://www.figma.com/file/StZjf8HnoeLdiXS7dYrLAh/JavaScript.-Sprint-4)
+* [Ссылка на сайт](https://aleksandrmenshchikov.github.io/mesto/index.html)
 
-**Картинки**
-
-Доставать картинки предстоит из Фигмы. Это расхожая практика, поэтому полезно потренироваться.
-Не забудьте [оптимизировать картинки](https://tinypng.com/), чтобы ваш сайт загружался быстрее.
-
-Удачи!
