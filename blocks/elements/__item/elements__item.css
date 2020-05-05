@@ -1,0 +1,7 @@
+.elements__item {
+  min-height: 361px;
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}

@@ -1,0 +1,9 @@
+.elements__item-bottom {
+  background-color: #fff;
+  margin: 0;
+  height: calc(361px - 282px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px 0;
+}
