@@ -3,7 +3,8 @@
 @import "./__title/profile__title.css";
 @import "./__edit-button/profile__edit-button.css";
 @import "./__info-top/profile__info-top.css";
-@import './__subtitle/profile__subtitle.css';
+@import "./__subtitle/profile__subtitle.css";
+@import "./__add-button/profile__add-button.css";
 
 .profile {
   max-width: 882px;

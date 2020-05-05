@@ -1,6 +1,5 @@
 .pop-up__container {
-  flex-basis: 465px;
-  display: flex;
-  min-height: 363px;
-  padding: 0 19px;
+  max-width: 465px;
+  padding: 0 45px 0 19px;
+  flex-basis: 430px;
 }

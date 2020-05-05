@@ -1,4 +1,4 @@
-.add-button {
+.profile__add-button {
   box-sizing: border-box;
   width: 150px;
   height: 50px;
@@ -6,7 +6,7 @@
   color: #fff;
   outline: none;
   margin-left: auto;
-  background-image: url(../../images/cross.png);
+  background-image: url(../../../images/cross.png);
   background-repeat: no-repeat;
   background-position: center;
   border: 2px solid #fff;
@@ -15,23 +15,23 @@
   border-radius: 2px;
 }
 
-.add-button:hover {
+.profile__add-button:hover {
   opacity: 0.6;
 }
 
 @media screen and (max-width: 700px) {
-  .add-button {
+  .profile__add-button {
     height: 40px;
-    background-image: url(../../images/cross-small.png);
+    background-size: 12%;
     width: 130px;
   }
 }
 
 @media screen and (max-width: 590px) {
-  .add-button {
+  .profile__add-button {
     margin-left: 0;
     width: 282px;
-    background-image: url(../../images/cross-small.png);
+    background-size: 6%;
     margin-top: 36px;
   }
 }

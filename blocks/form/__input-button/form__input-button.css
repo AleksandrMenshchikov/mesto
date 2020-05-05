@@ -1,7 +1,7 @@
 .form__input-button {
   display: block;
   width: 83%;
-  margin: 45px auto;
+  margin: 45px auto 0;
   height: 50px;
   background-color: #000;
   font-family: 'Inter',Arial, Helvetica, sans-serif;
