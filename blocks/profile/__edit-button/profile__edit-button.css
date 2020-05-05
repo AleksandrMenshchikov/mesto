@@ -6,7 +6,7 @@
   background-color: transparent;
   outline: none;
   border: 1px solid #fff;
-  background-image: url(../../../images/editor.png);
+  background-image: url(../../../images/editor.svg);
   background-repeat: no-repeat;
   background-position: center;
   transition: opacity 0.2s ease-in-out;
@@ -20,7 +20,8 @@
   .profile__edit-button {
     width: 18px;
     height: 18px;
-    background-image: url(../../../images/editor-small.png);
+    background-image: url(../../../images/editor.svg);
+    background-size: 50%;
   }
 }
 
