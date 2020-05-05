@@ -14,8 +14,32 @@
       <a href="#" class="header__logo-link">
         <img src="./images/logo.png" alt="Логотип" class="header__logo">
       </a>
-    </header>    
+    </header>
+    <section class="profile page__profile">
+      <img src="./images/avatar.jpg" alt="Фотография" class="profile__avatar">
+      <div class="profile__info">
+        <div class="profile__info-top">
+          <h2 class="profile__title">Жак-Ив Кусто</h2>
+          <button class="profile__edit-button" title="Редактировать профиль"></button>
+        </div>
+        <p class="profile__subtitle">Исследователь океана</p>
+      </div>
+      <button class="add-button" title="Добавить карточку"></button>
+      <div class="pop-up">
+        <div class="pop-up__container">
+          <form action="/" class="form" method="POST">
+            <h3 class="form__title">Редактировать профиль</h3>
+            <input type="text" class="form__input-name">
+            <input type="text" class="form__input-profession">
+            <input type="submit" class="form__input-button" value="Сохранить">
+          </form>
+          <div class="close-icon"></div>
+        </div>
+      </div>
+    </section>
   </div>
+
+  <script src="./scripts/script.js"></script>
 </body>
 
 </html>

@@ -1,0 +1,18 @@
+@import "./__avatar/profile__avatar.css";
+@import "./__info/profile__info.css";
+@import "./__title/profile__title.css";
+@import "./__edit-button/profile__edit-button.css";
+@import "./__info-top/profile__info-top.css";
+@import './__subtitle/profile__subtitle.css';
+
+.profile {
+  max-width: 882px;
+  display: flex;
+  align-items: center;
+}
+
+@media screen and (max-width: 590px) {
+  .profile {
+    flex-direction: column;
+  }
+}
