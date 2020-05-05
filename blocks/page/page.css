@@ -1,6 +1,7 @@
-@import '../page/__header/page__header.css';
-@import '../page/__profile/page__profile.css';
-@import '../page/__elements/page__elements.css';
+@import './__header/page__header.css';
+@import './__profile/page__profile.css';
+@import './__elements/page__elements.css';
+@import './__footer/page__footer.css';
 
 
 .page {
