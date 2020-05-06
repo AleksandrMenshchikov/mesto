@@ -21,3 +21,9 @@
 .form__input-button:hover {
   background: rgba(0, 0, 0, 0.8);
 }
+
+@media screen and (max-width: 425px) {
+  .form__input-button {
+    width: 90%;
+  }
+}
