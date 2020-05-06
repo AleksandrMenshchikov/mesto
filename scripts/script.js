@@ -5,9 +5,16 @@ const formInputList = document.querySelectorAll(".form__input");
 const profileTitle = document.querySelector(".profile__title");
 const profileSubtitle = document.querySelector(".profile__subtitle");
 const form = document.querySelector(".form");
+const formInputButton = document.querySelector(".form__input-button");
 
 const closePopup = () => {
   popUp.classList.remove("pop-up_opened");
+};
+
+const closePopupByEsc = (e) => {
+  if (e.keyCode === 27) {
+    closePopup();
+  }
 };
 
 const editProfile = () => {
@@ -28,3 +35,5 @@ profileEditButton.addEventListener("click", editProfile);
 closeIcon.addEventListener("click", closePopup);
 
 form.addEventListener("submit", submitForm);
+
+document.addEventListener("keyup", closePopupByEsc);
