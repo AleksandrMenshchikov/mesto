@@ -5,7 +5,6 @@ const formInputList = document.querySelectorAll(".form__input");
 const profileTitle = document.querySelector(".profile__title");
 const profileSubtitle = document.querySelector(".profile__subtitle");
 const form = document.querySelector(".form");
-const formInputButton = document.querySelector(".form__input-button");
 
 const closePopup = () => {
   popUp.classList.remove("pop-up_opened");
