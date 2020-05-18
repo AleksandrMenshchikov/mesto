@@ -9,6 +9,10 @@ const form = document.querySelector(".form");
 
 const closePopup = () => {
   popUp.classList.remove("pop-up_opened");
+  popUp.classList.add("pop-up_closed");
+  setTimeout(() => {
+    popUp.classList.remove("pop-up_closed");
+  }, 200);
 };
 
 const closePopupByEsc = (e) => {

@@ -1,0 +1,5 @@
+.pop-up_closed {
+  display: flex;
+  animation: slow-disappearance 0.2s ease-in-out 1;
+}
+
