@@ -104,6 +104,11 @@ const toggleLikeAndRemoveCardAndZoomImage = (e) => {
   } else if (e.target.classList.contains("elements__image")) {
     const popUpImageImg = document.querySelector(".pop-up-image__img");
     popUpImageImg.src = e.target.src;
+    const popUpImageDescription = document.querySelector(
+      ".pop-up-image__description"
+    );
+    popUpImageDescription.textContent =
+      e.target.nextElementSibling.children[0].textContent;
     popUpImage.classList.add("pop-up-image_opened");
   }
 };
