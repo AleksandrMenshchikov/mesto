@@ -10,4 +10,8 @@
 @import "../blocks/slow-disappearance/slow-disappearance.css";
 @import "../blocks/form/form.css";
 @import "../blocks/elements/elements.css";
+@import "../blocks/elements/__like/_active/elements__like_active.css";
 @import "../blocks/footer/footer.css";
+@import "../blocks/pop-up-image/pop-up-image.css";
+@import "../blocks/pop-up-image/_opened/pop-up-image_opened.css";
+@import "../blocks/pop-up-image/_closed/pop-up-image_closed.css";

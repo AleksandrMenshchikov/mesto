@@ -7,7 +7,6 @@
 @import "./__add-button/profile__add-button.css";
 
 .profile {
-  max-width: 882px;
   display: flex;
   align-items: center;
 }
@@ -17,3 +16,4 @@
     flex-direction: column;
   }
 }
+

@@ -1,4 +1,4 @@
-.pop-up_opened {
+.pop-up-image_opened {
   display: flex;
   -webkit-animation: slow-appearance 0.2s ease-in-out 1;
   animation: slow-appearance 0.2s ease-in-out 1;

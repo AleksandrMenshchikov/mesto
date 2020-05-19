@@ -1,8 +1,7 @@
-@import '../header/__logo-link/header__logo-link.css';
-@import '../header/__logo/header__logo.css';
+@import "../header/__logo-link/header__logo-link.css";
+@import "../header/__logo/header__logo.css";
 
 .header {
-  max-width: 882px;
   border-bottom: 1px solid #545454;
   opacity: 0.7;
 }

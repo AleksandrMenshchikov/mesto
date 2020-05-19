@@ -2,7 +2,8 @@
 @import "./__input/form__input.css";
 @import "./__input-button/form__input-button.css";
 @import "./__input/_name/form__input_name.css";
-@import './__input/_profession/form__input_profession.css';
+@import "./__input/_profession/form__input_profession.css";
+@import "./_active/form_active.css";
 
 .form {
   box-sizing: border-box;
@@ -12,4 +13,10 @@
   border-radius: 10px;
   align-self: flex-end;
   padding: 34px 0;
+}
+
+@media screen and (max-width: 425px) {
+  .form {
+    padding: 30px 0;
+  }
 }

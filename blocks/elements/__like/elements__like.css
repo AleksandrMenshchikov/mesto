@@ -10,4 +10,9 @@
   width: 22px;
   height: 20px;
   background-color: transparent;
+  transition: opacity 0.2s ease-in-out;;
+}
+
+.elements__like:hover {
+  opacity: 0.6;
 }

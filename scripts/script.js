@@ -1,3 +1,35 @@
+const initialCards = [
+  {
+    name: "Москва",
+    link:
+      "https://avatars.mds.yandex.net/get-zen_doc/1328583/pub_5ac5e6209d5cb36746245dd6_5ac5e68b7ddde81950d1205c/scale_1200",
+  },
+  {
+    name: "Санкт-Петербург",
+    link:
+      "https://avatars.mds.yandex.net/get-altay/1938975/2a0000016cd81e746d344d06ddb12bca34da/XXXL",
+  },
+  {
+    name: "Казань",
+    link:
+      "https://avatars.mds.yandex.net/get-pdb/805781/3eb83467-5647-44b3-b183-9f29bbe7319d/s1200?webp=false",
+  },
+  {
+    name: "Яндекс",
+    link:
+      "https://avatars.mds.yandex.net/get-pdb/2302431/eb3018d4-d57e-4911-bbf8-e97d8ca7f8f1/s1200?webp=false",
+  },
+  {
+    name: "Екатеринбург",
+    link: "https://mtdata.ru/u3/photoAE2A/20839068326-0/original.jpg",
+  },
+  {
+    name: "Альметьевск",
+    link:
+      "https://avatars.mds.yandex.net/get-zen_doc/176438/pub_5e1824f9cddb7100b16e5059_5e182dcce4fff000addee5af/scale_1200",
+  },
+];
+
 const closeIcon = document.querySelector(".pop-up__close-icon");
 const profileEditButton = document.querySelector(".profile__edit-button");
 const popUp = document.querySelector(".pop-up");
@@ -5,7 +37,14 @@ const formInputName = document.querySelector(".form__input_name");
 const formInputProfession = document.querySelector(".form__input_profession");
 const profileTitle = document.querySelector(".profile__title");
 const profileSubtitle = document.querySelector(".profile__subtitle");
-const form = document.querySelector(".form");
+const formProfile = document.querySelector(".form_profile");
+const elementsList = document.querySelector(".elements__list");
+const formInputNameCard = document.querySelector(".form__input_name-card");
+const formInputLinkCard = document.querySelector(".form__input_link-card");
+const profileAddButton = document.querySelector(".profile__add-button");
+const formCard = document.querySelector(".form_card");
+const popUpImage = document.querySelector(".pop-up-image");
+const popUpImageCloseIcon = document.querySelector(".pop-up-image__close-icon");
 
 const closePopup = () => {
   popUp.classList.remove("pop-up_opened");
@@ -16,28 +55,92 @@ const closePopup = () => {
 };
 
 const closePopupByEsc = (e) => {
-  if (e.keyCode === 27) {
+  if (e.keyCode === 27 && popUp.classList.contains("pop-up_opened")) {
     closePopup();
+  } else if (
+    e.keyCode === 27 &&
+    popUpImage.classList.contains("pop-up-image_opened")
+  ) {
+    closePopupImage();
   }
 };
 
 const editProfile = () => {
+  formCard.classList.add("form_non-active");
+  formProfile.classList.remove("form_non-active");
   popUp.classList.add("pop-up_opened");
   formInputName.value = profileTitle.textContent;
   formInputProfession.value = profileSubtitle.textContent;
 };
 
-const submitForm = (e) => {
+const submitFormProfile = (e) => {
   e.preventDefault();
   profileTitle.textContent = formInputName.value;
   profileSubtitle.textContent = formInputProfession.value;
   closePopup();
 };
 
+const addCard = () => {
+  popUp.classList.add("pop-up_opened");
+  formCard.classList.remove("form_non-active");
+  formProfile.classList.add("form_non-active");
+};
+
+const submitFormCard = (e) => {
+  e.preventDefault();
+  elementsList.prepend(
+    createCard(formInputNameCard.value, formInputLinkCard.value)
+  );
+  formInputNameCard.value = "";
+  formInputLinkCard.value = "";
+  closePopup();
+};
+
+const toggleLikeAndRemoveCardAndZoomImage = (e) => {
+  if (e.target.classList.contains("elements__like")) {
+    e.target.classList.toggle("elements__like_active");
+  } else if (e.target.classList.contains("elements__remove")) {
+    e.target.closest(".elements__item").remove();
+  } else if (e.target.classList.contains("elements__image")) {
+    const popUpImageImg = document.querySelector(".pop-up-image__img");
+    popUpImageImg.src = e.target.src;
+    popUpImage.classList.add("pop-up-image_opened");
+  }
+};
+
+const closePopupImage = () => {
+  popUpImage.classList.remove("pop-up-image_opened");
+  popUpImage.classList.add("pop-up-image_closed");
+  setTimeout(() => {
+    popUpImage.classList.remove("pop-up-image_closed");
+  }, 200);
+};
+
+const createCard = (name, link) => {
+  const card = document.querySelector("#card").content.cloneNode(true);
+  const elementsImage = card.querySelector(".elements__image");
+  elementsImage.src = link;
+  const elementsItemTitle = card.querySelector(".elements__item-title");
+  elementsItemTitle.textContent = name;
+  return card;
+};
+
+initialCards.forEach(({ name, link }) => {
+  elementsList.append(createCard(name, link));
+});
+
 profileEditButton.addEventListener("click", editProfile);
 
 closeIcon.addEventListener("click", closePopup);
 
-form.addEventListener("submit", submitForm);
+formProfile.addEventListener("submit", submitFormProfile);
+
+profileAddButton.addEventListener("click", addCard);
+
+formCard.addEventListener("submit", submitFormCard);
+
+elementsList.addEventListener("click", toggleLikeAndRemoveCardAndZoomImage);
+
+popUpImageCloseIcon.addEventListener("click", closePopupImage);
 
 document.addEventListener("keyup", closePopupByEsc);

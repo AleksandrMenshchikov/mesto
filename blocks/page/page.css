@@ -1,8 +1,7 @@
-@import './__header/page__header.css';
-@import './__profile/page__profile.css';
-@import './__elements/page__elements.css';
-@import './__footer/page__footer.css';
-
+@import "./__header/page__header.css";
+@import "./__profile/page__profile.css";
+@import "./__elements/page__elements.css";
+@import "./__footer/page__footer.css";
 
 .page {
   background-color: #000;
@@ -12,4 +11,7 @@
   -ms-text-size-adjust: 100%;
   -moz-text-size-adjust: 100%;
   min-width: 320px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
