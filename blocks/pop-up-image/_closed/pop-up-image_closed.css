@@ -1,5 +1,0 @@
-.pop-up-image_closed {
-  display: flex;
-  -webkit-animation: slow-disappearance 0.2s ease-in-out 1;
-  animation: slow-disappearance 0.2s ease-in-out 1;
-}
