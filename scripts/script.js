@@ -109,8 +109,9 @@ const zoomImage = (e) => {
     const popUpImageDescription = document.querySelector(
       ".pop-up-image__description"
     );
-    popUpImageDescription.textContent =
-      e.target.nextElementSibling.children[0].textContent;
+    popUpImageDescription.textContent = e.target
+      .closest(".elements__item")
+      .querySelector(".elements__item-title").textContent;
     popUpImage.classList.add("pop-up-image_opened");
   }
 };
