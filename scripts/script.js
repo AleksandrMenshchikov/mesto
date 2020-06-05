@@ -40,6 +40,18 @@ const elementsList = document.querySelector(".elements__list");
 const formCard = document.querySelector(".form_card");
 const popUpImage = document.querySelector(".pop-up-image");
 
+const clearErrors = () => {
+  document.querySelectorAll(".form__input-error").forEach((span) => {
+    span.textContent = "";
+  });
+  document.querySelectorAll(".form__input").forEach((input) => {
+    input.classList.remove("form__input_type_error");
+  });
+  document.querySelectorAll(".form__input-button").forEach((button) => {
+    button.setAttribute("disabled", true);
+  });
+};
+
 const openAndClosePopup = (e) => {
   if (e.target.classList.contains("profile__edit-button")) {
     formCard.classList.add("form_non-active");
@@ -53,21 +65,30 @@ const openAndClosePopup = (e) => {
     popUp.classList.add("pop-up_opened");
   } else if (e.target.classList.contains("elements__image")) {
     popUpImage.classList.add("pop-up-image_opened");
-  } else if (e.target.classList.contains("pop-up__close-icon")) {
+  } else if (
+    e.target.classList.contains("pop-up__close-icon") ||
+    e.target.classList.contains("pop-up")
+  ) {
     popUp.classList.remove("pop-up_opened");
-  } else if (e.target.classList.contains("pop-up-image__close-icon")) {
+    clearErrors();
+  } else if (
+    e.target.classList.contains("pop-up-image__close-icon") ||
+    e.target.classList.contains("pop-up-image")
+  ) {
     popUpImage.classList.remove("pop-up-image_opened");
   }
 };
 
 const closePopupByEsc = (e) => {
-  if (e.keyCode === 27 && popUp.classList.contains("pop-up_opened")) {
+  if (e.key === "Escape" && popUp.classList.contains("pop-up_opened")) {
     popUp.classList.remove("pop-up_opened");
+    clearErrors();
   } else if (
-    e.keyCode === 27 &&
+    e.key === "Escape" &&
     popUpImage.classList.contains("pop-up-image_opened")
   ) {
     popUpImage.classList.remove("pop-up-image_opened");
+    clearErrors();
   }
 };
 
@@ -76,6 +97,7 @@ const submitFormProfile = (e) => {
   profileTitle.textContent = formInputName.value;
   profileSubtitle.textContent = formInputProfession.value;
   popUp.classList.remove("pop-up_opened");
+  clearErrors();
 };
 
 const submitFormCard = (e) => {
@@ -88,6 +110,7 @@ const submitFormCard = (e) => {
   formInputNameCard.value = "";
   formInputLinkCard.value = "";
   popUp.classList.remove("pop-up_opened");
+  clearErrors();
 };
 
 const toggleLike = (e) => {

@@ -3,7 +3,10 @@
 @import "./__input-button/form__input-button.css";
 @import "./__input/_name/form__input_name.css";
 @import "./__input/_profession/form__input_profession.css";
-@import "./_active/form_active.css";
+@import "./_non-active/form_non-active.css";
+@import "./__input-error/form__input-error.css";
+@import "./__input/_type_error/form__input_type_error.css";
+@import "./__input-container/form__input-container.css";
 
 .form {
   box-sizing: border-box;

@@ -14,12 +14,21 @@
   cursor: pointer;
   outline: none;
   border-radius: 2px;
-  border: 2px solid #fff;
+  border: 1px solid #000;
   transition: all 0.2s ease-in-out;
+  box-sizing: content-box;
+  padding: 0;
 }
 
 .form__input-button:hover {
   background: rgba(0, 0, 0, 0.8);
+}
+
+.form__input-button:disabled {
+  background-color: transparent;
+  color: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  cursor: default;
 }
 
 @media screen and (max-width: 425px) {
