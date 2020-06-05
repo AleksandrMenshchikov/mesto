@@ -70,6 +70,7 @@ const openAndClosePopup = (e) => {
     e.target.classList.contains("pop-up")
   ) {
     popUp.classList.remove("pop-up_opened");
+    Array.from(document.forms).forEach((form) => form.reset());
     clearErrors();
   } else if (
     e.target.classList.contains("pop-up-image__close-icon") ||
@@ -82,13 +83,13 @@ const openAndClosePopup = (e) => {
 const closePopupByEsc = (e) => {
   if (e.key === "Escape" && popUp.classList.contains("pop-up_opened")) {
     popUp.classList.remove("pop-up_opened");
+    Array.from(document.forms).forEach((form) => form.reset());
     clearErrors();
   } else if (
     e.key === "Escape" &&
     popUpImage.classList.contains("pop-up-image_opened")
   ) {
     popUpImage.classList.remove("pop-up-image_opened");
-    clearErrors();
   }
 };
 
