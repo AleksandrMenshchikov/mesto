@@ -2,14 +2,22 @@ const isValidForm = (formSelector) => {
   return formSelector.checkValidity();
 };
 
+const hideMessageError = (e, errorClass, inputErrorClass) => {
+  const input = e.target;
+  const elementError = document.querySelector(`.${input.name}-error`);
+  if (input.checkValidity()) {
+    elementError.classList.remove(errorClass);
+    input.classList.remove(inputErrorClass);
+  }
+};
+
 const showMessageError = (e, errorClass, inputErrorClass) => {
-  if (e.target.checkValidity()) {
-    e.target.nextElementSibling.classList.remove(errorClass);
-    e.target.classList.remove(inputErrorClass);
-  } else {
-    e.target.nextElementSibling.classList.add(errorClass);
-    e.target.nextElementSibling.textContent = e.target.validationMessage;
-    e.target.classList.add(inputErrorClass);
+  const input = e.target;
+  const elementError = document.querySelector(`.${input.name}-error`);
+  if (!input.checkValidity()) {
+    elementError.classList.add(errorClass);
+    elementError.textContent = e.target.validationMessage;
+    input.classList.add(inputErrorClass);
   }
 };
 
@@ -31,6 +39,7 @@ const enableValidation = (options) => {
   inputSelectors.forEach((input) => {
     input.addEventListener("input", (e) => {
       showMessageError(e, options.errorClass, options.inputErrorClass);
+      hideMessageError(e, options.errorClass, options.inputErrorClass);
       handleButton(e, options.submitButtonSelector, options.formSelector);
     });
   });
