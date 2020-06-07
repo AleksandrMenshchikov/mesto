@@ -16,7 +16,7 @@ const showMessageError = (e, errorClass, inputErrorClass) => {
   const elementError = document.querySelector(`.${input.name}-error`);
   if (!input.checkValidity()) {
     elementError.classList.add(errorClass);
-    elementError.textContent = e.target.validationMessage;
+    elementError.textContent = input.validationMessage;
     input.classList.add(inputErrorClass);
   }
 };
