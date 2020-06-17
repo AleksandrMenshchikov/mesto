@@ -114,7 +114,6 @@ const openPopupFormProfile = () => {
 const openPopupFormCard = () => {
   formCard.classList.remove("form_non-active");
   formProfile.classList.add("form_non-active");
-
   popUp.classList.add("pop-up-opened");
   document.addEventListener("keyup", closePopupByEsc);
 };
@@ -140,19 +139,6 @@ const submitFormProfile = (e) => {
   clearErrors();
 };
 
-const setEventListenersOnImage = () => {
-  document.querySelectorAll(".elements__image").forEach((image) => {
-    image.addEventListener("click", zoomImage);
-  });
-};
-
-initialCards.forEach((data) => {
-  const card = new Card(data, "#card");
-  elementsList.append(card.generateCard());
-});
-
-setEventListenersOnImage();
-
 const submitFormCard = (e) => {
   e.preventDefault();
   const data = {};
@@ -161,10 +147,21 @@ const submitFormCard = (e) => {
   const card = new Card(data, "#card");
   elementsList.prepend(card.generateCard());
   formCard.reset();
-  setEventListenersOnImage();
+  elementsList.firstElementChild
+    .querySelector(".elements__image")
+    .addEventListener("click", zoomImage);
   togglePopup(popUp);
   clearErrors();
 };
+
+initialCards.forEach((data) => {
+  const card = new Card(data, "#card");
+  elementsList.append(card.generateCard());
+});
+
+document.querySelectorAll(".elements__image").forEach((image) => {
+  image.addEventListener("click", zoomImage);
+});
 
 popUpImage.addEventListener("click", closePopupImage);
 
