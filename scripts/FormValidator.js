@@ -52,15 +52,4 @@ export class FormValidator {
   }
 }
 
-const data = {
-  inputSelector: ".form__input",
-  errorInputSelector: "form__input_type_error",
-  errorClass: "form__input-error_visible",
-  submitButtonSelector: ".form__input-button",
-};
 
-const formValidator1 = new FormValidator(data, ".form_profile");
-formValidator1.enableValidation();
-
-const formValidator2 = new FormValidator(data, ".form_card");
-formValidator2.enableValidation();
