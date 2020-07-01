@@ -1,11 +1,9 @@
-import { closePopupByEsc } from "./utils.js";
-
-export class Card {
-  constructor(data, templateSelector, popupSelector) {
+export default class Card {
+  constructor(data, templateSelector, { handleCardClick }) {
     this._name = data.name;
     this._link = data.link;
     this._templateSelector = templateSelector;
-    this._popupSelector = popupSelector;
+    this._handleCardClick = handleCardClick;
   }
 
   _getTemplate() {
@@ -21,7 +19,6 @@ export class Card {
     this._element = this._getTemplate();
     this._elementRemove = this._element.querySelector(".elements__remove");
     this._elementLike = this._element.querySelector(".elements__like");
-    this._elementPopup = document.querySelector(this._popupSelector);
     this._elementImage = this._element.querySelector(".elements__image");
     this._setEventListeners();
     this._element.querySelector(
@@ -36,34 +33,16 @@ export class Card {
 
   _deleteCard() {
     this._element.remove();
+    this._element = null;
   }
 
   _toggleLike() {
     this._elementLike.classList.toggle("elements__like_active");
   }
 
-  _openPopup() {
-    this._elementPopup.classList.add("pop-up-opened");
-    const popupImageImg = this._elementPopup.querySelector(
-      ".pop-up-image__img"
-    );
-    popupImageImg.src = this._link;
-    const popUpImageDescription = this._elementPopup.querySelector(
-      ".pop-up-image__description"
-    );
-    popUpImageDescription.textContent = this._name;
-    document.addEventListener("keyup", closePopupByEsc);
-  }
-
   _setEventListeners() {
-    this._elementRemove.addEventListener("click", () => {
-      this._deleteCard();
-    });
-    this._elementLike.addEventListener("click", () => {
-      this._toggleLike();
-    });
-    this._elementImage.addEventListener("click", () => {
-      this._openPopup();
-    });
+    this._elementRemove.addEventListener("click", () => this._deleteCard());
+    this._elementLike.addEventListener("click", () => this._toggleLike());
+    this._elementImage.addEventListener("click", () => this._handleCardClick());
   }
 }

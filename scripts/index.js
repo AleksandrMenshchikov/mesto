@@ -1,110 +1,74 @@
-import { Card } from "./Card.js";
-import { FormValidator } from "./FormValidator.js";
 import { initialCards } from "./initialCards.js";
-import {
-  closePopupByEsc,
-  clearErrors,
-  togglePopup,
-  popUp,
-  popUpImage,
-  formProfile,
-  formCard,
-} from "./utils.js";
+import { data } from "./utils.js";
+import Card from "./Card.js";
+import FormValidator from "./FormValidator.js";
+import Section from "./Section.js";
+import PopupWithImage from "./PopupWithImage.js";
+import PopupWithForm from "./PopupWithForm.js";
+import UserInfo from "./UserInfo.js";
 
-const elementsList = document.querySelector(".elements__list");
-const profileEditButton = document.querySelector(".profile__edit-button");
-const formInputName = document.querySelector(".form__input_name");
-const formInputProfession = document.querySelector(".form__input_profession");
-const profileTitle = document.querySelector(".profile__title");
-const profileSubtitle = document.querySelector(".profile__subtitle");
-const profileAddButton = document.querySelector(".profile__add-button");
+const userInfo = new UserInfo(".profile__title", ".profile__subtitle");
 
-const data = {
-  inputSelector: ".form__input",
-  errorInputSelector: "form__input_type_error",
-  errorClass: "form__input-error_visible",
-  submitButtonSelector: ".form__input-button",
-};
+const formProfile = new PopupWithForm(".pop-up_profile", {
+  handleFormSubmit: (dataForm) => {
+    userInfo.setUserInfo(dataForm["input-name"], dataForm["input-profession"]);
+  },
+});
+formProfile.setEventListeners(".pop-up__close-icon");
 
-const formValidator1 = new FormValidator(data, ".form_profile");
-formValidator1.enableValidation();
+const formCard = new PopupWithForm(".pop-up_card", {
+  handleFormSubmit: (dataForm) => {
+    const { "input-name-card": name, "input-link-card": link } = dataForm;
+    const item = {};
+    item.name = name;
+    item.link = link;
+    const card = new Card(item, "#card", {
+      handleCardClick: () => {
+        const popupWithImage = new PopupWithImage(".pop-up-image");
+        popupWithImage.open(item.link, item.name);
+        popupWithImage.setEventListeners(".pop-up-image__close-icon");
+      },
+    });
+    const cardElement = card.generateCard();
+    document.querySelector(".elements__list").prepend(cardElement);
+  },
+});
+formCard.setEventListeners(".pop-up__close-icon");
 
-const formValidator2 = new FormValidator(data, ".form_card");
-formValidator2.enableValidation();
+document
+  .querySelector(".profile__edit-button")
+  .addEventListener("click", () => {
+    formProfile.open();
+    formProfile.setInputValues(
+      userInfo.getUserInfo().user,
+      userInfo.getUserInfo().about
+    );
+    const formValidator = new FormValidator(data, ".form_profile");
+    formValidator.enableValidation();
+  });
 
-const closePopupImage = (e) => {
-  if (
-    e.target.classList.contains("pop-up-image") ||
-    e.target.classList.contains("pop-up-image__close-icon")
-  ) {
-    togglePopup(popUpImage);
-    document.removeEventListener("keyup", closePopupByEsc);
-  }
-};
-
-const closePopupForm = (e) => {
-  if (
-    e.target.classList.contains("pop-up") ||
-    e.target.classList.contains("pop-up__close-icon")
-  ) {
-    togglePopup(popUp);
-    formProfile.classList.contains("form_non-active") ? formCard.reset() : null;
-    formProfile.classList.contains("form_non-active")
-      ? clearErrors(formCard)
-      : clearErrors(formProfile);
-    document.removeEventListener("keyup", closePopupByEsc);
-  }
-};
-
-const openPopupFormProfile = () => {
-  formCard.classList.add("form_non-active");
-  formProfile.classList.remove("form_non-active");
-  formInputName.value = profileTitle.textContent;
-  formInputProfession.value = profileSubtitle.textContent;
-  togglePopup(popUp);
-  document.addEventListener("keyup", closePopupByEsc);
-};
-
-const openPopupFormCard = () => {
-  formCard.classList.remove("form_non-active");
-  formProfile.classList.add("form_non-active");
-  togglePopup(popUp);
-  document.addEventListener("keyup", closePopupByEsc);
-};
-
-const submitFormProfile = (e) => {
-  e.preventDefault();
-  profileTitle.textContent = formInputName.value;
-  profileSubtitle.textContent = formInputProfession.value;
-  togglePopup(popUp);
-  clearErrors(formProfile);
-};
-
-const submitFormCard = (e) => {
-  e.preventDefault();
-  const data = {};
-  data.name = document.querySelector(".form__input_name-card").value;
-  data.link = document.querySelector(".form__input_link-card").value;
-  const card = new Card(data, "#card", ".pop-up-image");
-  elementsList.prepend(card.generateCard());
-  formCard.reset();
-  togglePopup(popUp);
-  clearErrors(formCard);
-};
-
-initialCards.forEach((data) => {
-  const card = new Card(data, "#card", ".pop-up-image");
-  elementsList.append(card.generateCard());
+document.querySelector(".profile__add-button").addEventListener("click", () => {
+  formCard.open();
+  const formValidator = new FormValidator(data, ".form_card");
+  formValidator.enableValidation();
 });
 
-popUpImage.addEventListener("click", closePopupImage);
+const cardList = new Section(
+  {
+    data: initialCards,
+    renderer: (item) => {
+      const card = new Card(item, "#card", {
+        handleCardClick: () => {
+          const popupWithImage = new PopupWithImage(".pop-up-image");
+          popupWithImage.open(item.link, item.name);
+          popupWithImage.setEventListeners(".pop-up-image__close-icon");
+        },
+      });
+      const cardElement = card.generateCard();
+      cardList.addItem(cardElement);
+    },
+  },
+  ".elements__list"
+);
 
-profileEditButton.addEventListener("click", openPopupFormProfile);
-
-formProfile.addEventListener("submit", submitFormProfile);
-
-popUp.addEventListener("click", closePopupForm);
-
-profileAddButton.addEventListener("click", openPopupFormCard);
-
-formCard.addEventListener("submit", submitFormCard);
+cardList.renderItems();
