@@ -1,3 +1,4 @@
+import "../pages/index.css";
 import { initialCards } from "./initialCards.js";
 import { data } from "./utils.js";
 import Card from "./Card.js";
