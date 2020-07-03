@@ -78,7 +78,8 @@ cardList.renderItems();
 
 profileEditButton.addEventListener("click", () => {
   formProfile.open();
-  formProfile.setInputValues(userInfo.getUserInfo().user, userInfo.getUserInfo().about);
+  const userInfo = userInfo.getUserInfo();
+  formProfile.setInputValues(userInfo.user, userInfo.about);
 });
 
 profileAddButton.addEventListener("click", () => formCard.open());

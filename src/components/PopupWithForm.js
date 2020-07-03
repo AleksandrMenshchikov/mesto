@@ -5,6 +5,7 @@ const selectors = {
   formInput: ".form__input",
   formInputProfession: ".form__input_profession",
   formInputError: ".form__input-error",
+  formInputButton: ".form__input-button",
   form: ".form",
 };
 
@@ -13,10 +14,9 @@ const classes = {
 };
 
 export default class PopupWithForm extends Popup {
-  constructor(popupSelector, { handleFormSubmit, handleButtonForm }) {
+  constructor(popupSelector, { handleFormSubmit }) {
     super(popupSelector);
     this._handleFormSubmit = handleFormSubmit;
-    this._handleButtonForm = handleButtonForm;
   }
 
   setInputValues(userInfo, aboutUser) {
@@ -37,7 +37,7 @@ export default class PopupWithForm extends Popup {
   close() {
     super.close();
     this._formElement.reset();
-    this._handleButtonForm();
+    this._formElement.querySelector(selectors.formInputButton).disabled = true;
     this._formElement
       .querySelectorAll(selectors.formInputError)
       .forEach((item) => item.textContent = "");
