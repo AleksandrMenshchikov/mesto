@@ -1,3 +1,7 @@
+const selectors = {
+  popupSelector: "pop-up-opened",
+};
+
 export default class Popup {
   constructor(popupSelector) {
     this._popup = document.querySelector(popupSelector);
@@ -5,7 +9,7 @@ export default class Popup {
   }
 
   open() {
-    this._popup.classList.add("pop-up-opened");
+    this._popup.classList.add(selectors.popupSelector);
     this._popup.addEventListener("click", (e) =>
       e.target === this._popup ? this.close() : null
     );
@@ -13,7 +17,7 @@ export default class Popup {
   }
 
   close() {
-    this._popup.classList.remove("pop-up-opened");
+    this._popup.classList.remove(selectors.popupSelector);
     document.removeEventListener("keyup", this._handleEscClose);
   }
 

@@ -1,3 +1,15 @@
+const selectors = {
+  elementsItem: ".elements__item",
+  elementsRemove: ".elements__remove",
+  elementsLike: ".elements__like",
+  elementsImage: ".elements__image",
+  elementsItemTitle: ".elements__item-title",
+};
+
+const classes = {
+  elementsLikeActive: "elements__like_active",
+};
+
 export default class Card {
   constructor(data, templateSelector, { handleCardClick }) {
     this._name = data.name;
@@ -10,23 +22,19 @@ export default class Card {
     const cardElement = document
       .querySelector(this._templateSelector)
       .content.cloneNode(true)
-      .querySelector(".elements__item");
+      .querySelector(selectors.elementsItem);
 
     return cardElement;
   }
 
   generateCard() {
     this._element = this._getTemplate();
-    this._elementRemove = this._element.querySelector(".elements__remove");
-    this._elementLike = this._element.querySelector(".elements__like");
-    this._elementImage = this._element.querySelector(".elements__image");
+    this._elementRemove = this._element.querySelector(selectors.elementsRemove);
+    this._elementLike = this._element.querySelector(selectors.elementsLike);
+    this._elementImage = this._element.querySelector(selectors.elementsImage);
     this._setEventListeners();
-    this._element.querySelector(
-      ".elements__item-title"
-    ).textContent = this._name;
-    this._element.querySelector(
-      ".elements__image"
-    ).style.backgroundImage = `url(${this._link})`;
+    this._element.querySelector(selectors.elementsItemTitle).textContent = this._name;
+    this._element.querySelector(selectors.elementsImage).style.backgroundImage = `url(${this._link})`;
 
     return this._element;
   }
@@ -37,7 +45,7 @@ export default class Card {
   }
 
   _toggleLike() {
-    this._elementLike.classList.toggle("elements__like_active");
+    this._elementLike.classList.toggle(classes.elementsLikeActive);
   }
 
   _setEventListeners() {

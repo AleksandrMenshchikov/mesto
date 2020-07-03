@@ -22,22 +22,20 @@ export default class FormValidator {
   }
 
   _checkInputValidity(input) {
-    if (input.checkValidity()) {
-      this._hideMessageError(input);
-    } else {
-      this._showMessageError(input);
-    }
+    input.checkValidity()
+      ? this._hideMessageError(input)
+      : this._showMessageError(input);
   }
 
   _setStateOfButton() {
-    this._buttonElement = this._formElement.querySelector(
-      this._submitButtonSelector
-    );
-    if (this._formElement.checkValidity()) {
-      this._buttonElement.removeAttribute("disabled");
-    } else {
-      this._buttonElement.setAttribute("disabled", true);
-    }
+    this._buttonElement = this._formElement.querySelector(this._submitButtonSelector);
+    this._formElement.checkValidity()
+      ? this._buttonElement.removeAttribute("disabled")
+      : this._buttonElement.setAttribute("disabled", true);
+  }
+
+  setButtonDisabled() {
+    this._buttonElement.setAttribute("disabled", true);
   }
 
   enableValidation() {
@@ -51,5 +49,3 @@ export default class FormValidator {
     });
   }
 }
-
-
