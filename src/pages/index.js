@@ -34,7 +34,6 @@ const popupWithImage = new PopupWithImage(selectors.popUpImage);
 
 const formProfile = new PopupWithForm(selectors.popUpProfile, {
   handleFormSubmit: (dataForm) => userInfo.setUserInfo(dataForm["input-name"], dataForm["input-profession"]),
-  handleButtonForm: () => formValidatorProfile.setButtonDisabled(),
 });
 formProfile.setEventListeners(selectors.popUpCloseIcon);
 
@@ -53,7 +52,6 @@ const formCard = new PopupWithForm(selectors.popUpCard, {
     const cardElement = card.generateCard();
     cardList.prependItem(cardElement);
   },
-  handleButtonForm: () => formValidatorCard.setButtonDisabled(),
 });
 formCard.setEventListeners(selectors.popUpCloseIcon);
 
