@@ -5,7 +5,6 @@ const selectors = {
   formInput: ".form__input",
   formInputProfession: ".form__input_profession",
   formInputError: ".form__input-error",
-  formInputButton: ".form__input-button",
   form: ".form",
 };
 
@@ -37,7 +36,6 @@ export default class PopupWithForm extends Popup {
   close() {
     super.close();
     this._formElement.reset();
-    this._formElement.querySelector(selectors.formInputButton).disabled = true;
     this._formElement
       .querySelectorAll(selectors.formInputError)
       .forEach((item) => item.textContent = "");

@@ -31,6 +31,7 @@ formValidatorCard.enableValidation();
 const userInfo = new UserInfo(selectors.profileTitle, selectors.profileSubtitle);
 
 const popupWithImage = new PopupWithImage(selectors.popUpImage);
+popupWithImage.setEventListeners(selectors.popUpImageCloseIcon);
 
 const formProfile = new PopupWithForm(selectors.popUpProfile, {
   handleFormSubmit: (dataForm) => userInfo.setUserInfo(dataForm["input-name"], dataForm["input-profession"]),
@@ -44,10 +45,7 @@ const formCard = new PopupWithForm(selectors.popUpCard, {
     item.name = name;
     item.link = link;
     const card = new Card(item, selectors.card, {
-      handleCardClick: () => {
-        popupWithImage.open(item.link, item.name);
-        popupWithImage.setEventListeners(selectors.popUpImageCloseIcon);
-      },
+      handleCardClick: () => popupWithImage.open(item.link, item.name),
     });
     const cardElement = card.generateCard();
     cardList.prependItem(cardElement);
@@ -60,10 +58,7 @@ const cardList = new Section(
     data: initialCards,
     renderer: (item) => {
       const card = new Card(item, selectors.card, {
-        handleCardClick: () => {
-          popupWithImage.open(item.link, item.name);
-          popupWithImage.setEventListeners(selectors.popUpImageCloseIcon);
-        },
+        handleCardClick: () => popupWithImage.open(item.link, item.name),
       });
       const cardElement = card.generateCard();
       cardList.appendItem(cardElement);
@@ -71,15 +66,18 @@ const cardList = new Section(
   },
   selectors.elementsList
 );
-
 cardList.renderItems();
 
 profileEditButton.addEventListener("click", () => {
   formProfile.open();
-  const userInfo = userInfo.getUserInfo();
-  formProfile.setInputValues(userInfo.user, userInfo.about);
+  formValidatorProfile.setButtonDisabled();
+  const userData = userInfo.getUserInfo();
+  formProfile.setInputValues(userData.user, userData.about);
 });
 
-profileAddButton.addEventListener("click", () => formCard.open());
+profileAddButton.addEventListener("click", () => {
+  formCard.open();
+  formValidatorCard.setButtonDisabled();
+});
 
 

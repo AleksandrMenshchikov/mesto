@@ -34,6 +34,12 @@ export default class FormValidator {
       : this._buttonElement.setAttribute("disabled", true);
   }
 
+  setButtonDisabled() {
+    this._formElement
+      .querySelector(this._submitButtonSelector)
+      .setAttribute("disabled", true);
+  }
+
   enableValidation() {
     this._formElement = document.querySelector(this._formSelector);
     const listInputs = this._formElement.querySelectorAll(this._inputSelector);
