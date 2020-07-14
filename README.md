@@ -12,5 +12,5 @@
 
 **MESTO**
 
-* [Ссылка на сайт](https://2rkmz.sse.codesandbox.io/)
+* [Ссылка на сайт](https://aleksandrmenshchikov.github.io/mesto/)
 
