@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mesto</title>
-  
+
 </head>
 
 <body>
@@ -17,13 +17,15 @@
     </header>
 
     <section class="profile page__profile">
-      <img src="./images/avatar.jpg" alt="Фотография" class="profile__avatar">
+      <div class="profile__avatar-container">
+        <img src="./images/loading-gif1.gif" alt="Фотография" class="profile__avatar">
+      </div>
       <div class="profile__info">
         <div class="profile__info-top">
-          <h2 class="profile__title">Жак-Ив Кусто</h2>
+          <h2 class="profile__title">Loading...</h2>
           <button type="button" class="profile__edit-button" title="Редактировать профиль"></button>
         </div>
-        <p class="profile__subtitle">Исследователь океана</p>
+        <p class="profile__subtitle">Loading...</p>
       </div>
       <button type="button" class="profile__add-button" title="Добавить карточку"></button>
     </section>
@@ -53,6 +55,7 @@
         <button type="submit" class="form__input-button" disabled>Сохранить</button>
       </form>
     </div>
+
     <div class="pop-up pop-up_card">
       <form novalidate name="form-add-card" action="#" class="form form_card" method="POST">
         <button type="button" class="pop-up__close-icon" aria-label="Закрыть форму"></button>
@@ -78,6 +81,27 @@
         <figcaption class="pop-up-image__description">Польский костел</figcaption>
       </figure>
     </div>
+
+    <div class="pop-up pop-up_confirm">
+      <form name="form-confirm" action="#" class="form form-confirm" method="POST">
+        <button type="button" class="pop-up__close-icon" aria-label="Закрыть форму"></button>
+        <h3 class="form__title">Вы уверены?</h3>
+        <button type="submit" class="form__input-button form__input-button_comfirm">Да</button>
+      </form>
+    </div>
+
+    <div class="pop-up pop-up_avatar">
+      <form novalidate name="form-avatar" action="#" class="form form_avatar" method="POST">
+        <button type="button" class="pop-up__close-icon" aria-label="Закрыть форму"></button>
+        <h3 class="form__title">Обновить аватар</h3>
+        <div class="form__input-container">
+          <input name="input-link-avatar" type="url" class="form__input form__input_link-avatar"
+            placeholder="Ссылка на картинку" required>
+          <span id="input-link-avatar-error" class="form__input-error">Ошибка</span>
+        </div>
+        <button type="submit" class="form__input-button" disabled>Сохранить</button>
+      </form>
+    </div>
   </div>
 
   <template id="card">
@@ -86,7 +110,10 @@
       <div class="elements__image" role="img"></div>
       <article class="elements__item-bottom">
         <h4 class="elements__item-title"></h4>
-        <button type="button" class="elements__like" aria-label="Поставить лайк в виде сердечка"></button>
+        <div class="elements__like-container">
+          <button type="button" class="elements__like" aria-label="Поставить лайк в виде сердечка"></button>
+          <div class="elements__like-counter">0</div>
+        </div>
       </article>
     </li>
   </template>

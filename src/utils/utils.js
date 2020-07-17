@@ -10,3 +10,7 @@ export const profileEditButton = document.querySelector(
 );
 
 export const profileAddButton = document.querySelector(".profile__add-button");
+
+export const profileAvatar = document.querySelector(
+  ".profile__avatar-container"
+);
