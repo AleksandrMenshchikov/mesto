@@ -2,7 +2,6 @@ export default class Api {
   constructor(options) {
     this._baseUrl = options.baseUrl;
     this._headers = options.headers;
-    this._setUserData();
   }
 
   _handleResponse(res) {
@@ -12,17 +11,11 @@ export default class Api {
     return Promise.reject(`Ошибка: ${res.status}`);
   }
 
-  _setUserData() {
-    fetch(`${this._baseUrl}/users/me`, {
+  setUserData() {
+    return fetch(`${this._baseUrl}/users/me`, {
       headers: this._headers,
     })
       .then(this._handleResponse)
-      .then((data) => {
-        document.querySelector(".profile__title").textContent = data.name;
-        document.querySelector(".profile__subtitle").textContent = data.about;
-        document.querySelector(".profile__avatar").src = data.avatar;
-      })
-      .catch((err) => console.log(err));
   }
 
   getInitialCards() {

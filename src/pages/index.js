@@ -21,6 +21,7 @@ const selectors = {
   formAvatar: ".form_avatar",
   profileTitle: ".profile__title",
   profileSubtitle: ".profile__subtitle",
+  profileAvatar: ".profile__avatar",
   popUpImage: ".pop-up-image",
   popUpProfile: ".pop-up_profile",
   popUpConfirm: ".pop-up_confirm",
@@ -40,6 +41,14 @@ const api = new Api({
     "Content-Type": "application/json;charset=utf-8",
   },
 });
+api
+  .setUserData()
+  .then((data) => {
+    document.querySelector(selectors.profileTitle).textContent = data.name;
+    document.querySelector(selectors.profileSubtitle).textContent = data.about;
+    document.querySelector(selectors.profileAvatar).src = data.avatar;
+  })
+  .catch((err) => console.log(err));
 
 const formValidatorProfile = new FormValidator(data, selectors.formProfile);
 formValidatorProfile.enableValidation();
