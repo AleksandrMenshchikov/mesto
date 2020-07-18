@@ -12,8 +12,11 @@ export default class Card {
     this._likes = data.likes;
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
+    this._handleCardClick = this._handleCardClick.bind(this);
     this._handleButtonRemove = handleButtonRemove;
+    this._handleButtonRemove = this._handleButtonRemove.bind(this);
     this._handleButtonLike = handleButtonLike;
+    this._handleButtonLike = this._handleButtonLike.bind(this);
   }
 
   _getTemplate() {
@@ -33,7 +36,7 @@ export default class Card {
     this._elementRemove = this._element.querySelector(selectors.elementsRemove);
     if (id === "668ea0a7f8f07344312fc2a6") {
       this._elementRemove.classList.add("elements__remove_active");
-    } 
+    }
     this._elementLike = this._element.querySelector(selectors.elementsLike);
     this._setColorLike("668ea0a7f8f07344312fc2a6", this._likes);
     this._elementImage = this._element.querySelector(selectors.elementsImage);
@@ -48,12 +51,15 @@ export default class Card {
     return this._element;
   }
 
-  _deleteCard() {
+  deleteCard() {
     this._element.remove();
     this._element = null;
+    this._elementLike.removeEventListener("click", this._handleButtonLike);
+    this._elementRemove.removeEventListener("click", this._handleButtonRemove);
+    this._elementImage.removeEventListener("click", this._handleCardClick);
   }
 
-  _toggleLike() {
+  toggleLike() {
     this._elementLike.classList.toggle(classes.elementsLikeActive);
   }
 
@@ -74,11 +80,8 @@ export default class Card {
   }
 
   _setEventListeners() {
-    this._elementLike.addEventListener("click", () => this._handleButtonLike());
-    this._elementRemove.addEventListener("click", (e) =>
-      this._handleButtonRemove(e)
-    );
-    this._elementLike.addEventListener("click", () => this._toggleLike());
-    this._elementImage.addEventListener("click", () => this._handleCardClick());
+    this._elementLike.addEventListener("click", this._handleButtonLike);
+    this._elementRemove.addEventListener("click", this._handleButtonRemove);
+    this._elementImage.addEventListener("click", this._handleCardClick);
   }
 }

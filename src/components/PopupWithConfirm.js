@@ -7,7 +7,7 @@ export default class PopupWithConfirm extends Popup {
     super(popupSelector);
   }
 
-  handleButton(element, deleteCard) {
+  handleButton(deleteCard) {
     const button = this._popup.querySelector(selectors.formInputButtonComfirm);
     button.addEventListener("click", (e) => {
       e.preventDefault();

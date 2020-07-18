@@ -78,13 +78,13 @@ formProfile.setEventListeners(selectors.popUpCloseIcon);
 const handleData = (data) => {
   const card = new Card(data, selectors.card, {
     handleCardClick: () => popupWithImage.open(data.link, data.name),
-    handleButtonRemove: (e) => {
-      const element = e.target.closest(".elements__item");
+    handleButtonRemove: () => {
       popupWithConfirm.open();
-      popupWithConfirm.handleButton(element, function () {
+      //devTools во вкладке Event Listeners на показывает, что обработчик события клика кнопки формы подтверждения создается повторно
+      popupWithConfirm.handleButton(function () {
         api
           .deleteCard(data._id)
-          .then(() => element.remove())
+          .then(() => card.deleteCard())
           .catch((err) => console.log(err));
       });
     },
@@ -94,6 +94,7 @@ const handleData = (data) => {
           .putLike(data._id)
           .then((res) => {
             card.setLikes(res.likes);
+            card.toggleLike();
           })
           .catch((err) => console.log(err));
       } else {
@@ -101,6 +102,7 @@ const handleData = (data) => {
           .deleteLike(data._id)
           .then((res) => {
             card.setLikes(res.likes);
+            card.toggleLike();
           })
           .catch((err) => console.log(err));
       }
@@ -110,6 +112,7 @@ const handleData = (data) => {
   cardElement.querySelector(".elements__like-counter ").textContent =
     data.likes.length;
   document.querySelector(selectors.elementsList).append(cardElement);
+  // У нас по заданию cardList создается не глобально, а в методе then поэтомы я не могу здесь обратиться к cardList
   formCard.close();
 };
 
@@ -126,9 +129,7 @@ formCard.setEventListeners(selectors.popUpCloseIcon);
 
 Promise.all([api.getInitialCards(), api.getUserData()])
   .then((result) => {
-    document.querySelector(selectors.profileTitle).textContent = result[1].name;
-    document.querySelector(selectors.profileSubtitle).textContent =
-      result[1].about;
+    userInfo.setUserInfo(result[1].name, result[1].about);
     document.querySelector(selectors.profileAvatar).src = result[1].avatar;
 
     const cardList = new Section(
