@@ -1,15 +1,6 @@
 import Popup from "./Popup.js";
 
-const selectors = {
-  formInput: ".form__input",
-  formInputError: ".form__input-error",
-  form: ".form",
-  profileAvatar: ".profile__avatar",
-};
-
-const classes = {
-  formInputTypeError: "form__input_type_error",
-};
+import { selectors, classes } from "../utils/utils.js";
 
 export default class PopupWithAvatar extends Popup {
   constructor(popupSelector, { handleFormSubmit }) {

@@ -11,7 +11,7 @@ export default class Api {
     return Promise.reject(`Ошибка: ${res.status}`);
   }
 
-  setUserData() {
+  getUserData() {
     return fetch(`${this._baseUrl}/users/me`, {
       headers: this._headers,
     })
@@ -47,10 +47,10 @@ export default class Api {
   }
 
   deleteCard(cardId) {
-    fetch(`${this._baseUrl}/cards/${cardId}`, {
+    return fetch(`${this._baseUrl}/cards/${cardId}`, {
       method: "DELETE",
       headers: this._headers,
-    });
+    }).then(this._handleResponse);
   }
 
   putLike(cardId) {

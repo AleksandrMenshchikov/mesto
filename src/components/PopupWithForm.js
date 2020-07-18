@@ -1,16 +1,6 @@
 import Popup from "./Popup.js";
 
-const selectors = {
-  formInputName: ".form__input_name",
-  formInput: ".form__input",
-  formInputProfession: ".form__input_profession",
-  formInputError: ".form__input-error",
-  form: ".form",
-};
-
-const classes = {
-  formInputTypeError: "form__input_type_error",
-};
+import { selectors, classes } from "../utils/utils.js";
 
 export default class PopupWithForm extends Popup {
   constructor(popupSelector, { handleFormSubmit }) {

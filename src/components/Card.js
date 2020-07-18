@@ -1,15 +1,4 @@
-const selectors = {
-  elementsItem: ".elements__item",
-  elementsRemove: ".elements__remove",
-  elementsLike: ".elements__like",
-  elementsImage: ".elements__image",
-  elementsItemTitle: ".elements__item-title",
-  elementsLikeCounter: ".elements__like-counter",
-};
-
-const classes = {
-  elementsLikeActive: "elements__like_active",
-};
+import { selectors, classes } from "../utils/utils.js";
 
 export default class Card {
   constructor(
@@ -19,15 +8,12 @@ export default class Card {
   ) {
     this._name = data.name;
     this._link = data.link;
-    this._id = data.id;
+    this._id = data._id;
+    this._likes = data.likes;
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
     this._handleButtonRemove = handleButtonRemove;
     this._handleButtonLike = handleButtonLike;
-  }
-
-  getCardId() {
-    return this._id;
   }
 
   _getTemplate() {
@@ -46,9 +32,10 @@ export default class Card {
     );
     this._elementRemove = this._element.querySelector(selectors.elementsRemove);
     if (id === "668ea0a7f8f07344312fc2a6") {
-      this.addButtonRemove();
-    }
+      this._elementRemove.classList.add("elements__remove_active");
+    } 
     this._elementLike = this._element.querySelector(selectors.elementsLike);
+    this._setColorLike("668ea0a7f8f07344312fc2a6", this._likes);
     this._elementImage = this._element.querySelector(selectors.elementsImage);
     this._setEventListeners();
     this._element.querySelector(
@@ -61,10 +48,6 @@ export default class Card {
     return this._element;
   }
 
-  addButtonRemove() {
-    this._elementRemove.classList.add("elements__remove_active");
-  }
-
   _deleteCard() {
     this._element.remove();
     this._element = null;
@@ -74,7 +57,7 @@ export default class Card {
     this._elementLike.classList.toggle(classes.elementsLikeActive);
   }
 
-  setColorLike(userId, arrLikes) {
+  _setColorLike(userId, arrLikes) {
     arrLikes.forEach((element) => {
       element._id === userId
         ? this._elementLike.classList.add("elements__like_active")

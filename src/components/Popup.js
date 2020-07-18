@@ -1,10 +1,4 @@
-const selectors = {
-  popupSelector: "pop-up-opened",
-};
-
-const classes = {
-  formInputButton: ".form__input-button",
-};
+import {selectors, classes } from "../utils/utils.js";
 
 export default class Popup {
   constructor(popupSelector) {
@@ -13,8 +7,7 @@ export default class Popup {
   }
 
   open() {
-    this._buttonForm = this._popup.querySelector(classes.formInputButton);
-    this._popup.classList.add(selectors.popupSelector);
+    this._popup.classList.add(classes.popUpOpened);
     this._popup.addEventListener("click", (e) =>
       e.target === this._popup ? this.close() : null
     );
@@ -22,7 +15,7 @@ export default class Popup {
   }
 
   close() {
-    this._popup.classList.remove(selectors.popupSelector);
+    this._popup.classList.remove(classes.popUpOpened);
     document.removeEventListener("keyup", this._handleEscClose);
   }
 
@@ -31,7 +24,7 @@ export default class Popup {
   }
 
   handleButtonForm(textForButton) {
-    const buttonForm = this._popup.querySelector(classes.formInputButton);
+    const buttonForm = this._popup.querySelector(selectors.formInputButton);
     buttonForm.textContent = textForButton;
   }
 
