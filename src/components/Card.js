@@ -54,6 +54,10 @@ export default class Card {
   deleteCard() {
     this._element.remove();
     this._element = null;
+    this._removeEventListeners();
+  }
+
+  _removeEventListeners() {
     this._elementLike.removeEventListener("click", this._handleButtonLike);
     this._elementRemove.removeEventListener("click", this._handleButtonRemove);
     this._elementImage.removeEventListener("click", this._handleCardClick);

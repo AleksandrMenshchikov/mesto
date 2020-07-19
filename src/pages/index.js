@@ -75,16 +75,19 @@ const formProfile = new PopupWithForm(selectors.popUpProfile, {
 });
 formProfile.setEventListeners(selectors.popUpCloseIcon);
 
+const cardList = new Section(selectors.elementsList);
+
 const handleData = (data) => {
   const card = new Card(data, selectors.card, {
     handleCardClick: () => popupWithImage.open(data.link, data.name),
     handleButtonRemove: () => {
       popupWithConfirm.open();
-      //devTools во вкладке Event Listeners на показывает, что обработчик события клика кнопки формы подтверждения создается повторно
       popupWithConfirm.handleButton(function () {
         api
           .deleteCard(data._id)
-          .then(() => card.deleteCard())
+          .then(() => {
+            card.deleteCard();
+          })
           .catch((err) => console.log(err));
       });
     },
@@ -111,8 +114,7 @@ const handleData = (data) => {
   const cardElement = card.generateCard(data.owner._id);
   cardElement.querySelector(".elements__like-counter ").textContent =
     data.likes.length;
-  document.querySelector(selectors.elementsList).append(cardElement);
-  // У нас по заданию cardList создается не глобально, а в методе then поэтомы я не могу здесь обратиться к cardList
+  cardList.appendItem(cardElement);
   formCard.close();
 };
 
@@ -132,14 +134,7 @@ Promise.all([api.getInitialCards(), api.getUserData()])
     userInfo.setUserInfo(result[1].name, result[1].about);
     document.querySelector(selectors.profileAvatar).src = result[1].avatar;
 
-    const cardList = new Section(
-      {
-        data: result[0],
-        renderer: handleData,
-      },
-      selectors.elementsList
-    );
-    cardList.renderItems();
+    cardList.renderItems(result[0], handleData);
   })
   .catch((err) => console.log(err));
 
