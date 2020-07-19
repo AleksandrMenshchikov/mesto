@@ -75,6 +75,17 @@ const formProfile = new PopupWithForm(selectors.popUpProfile, {
 });
 formProfile.setEventListeners(selectors.popUpCloseIcon);
 
+const formCard = new PopupWithForm(selectors.popUpCard, {
+  handleFormSubmit: (dataForm) => {
+    formCard.handleButtonForm("Загрузка...");
+    api
+      .postCard(dataForm["input-name-card"], dataForm["input-link-card"])
+      .then(handleData)
+      .catch((err) => console.log(err));
+  },
+});
+formCard.setEventListeners(selectors.popUpCloseIcon);
+
 const cardList = new Section(selectors.elementsList);
 
 const handleData = (data) => {
@@ -117,17 +128,6 @@ const handleData = (data) => {
   cardList.appendItem(cardElement);
   formCard.close();
 };
-
-const formCard = new PopupWithForm(selectors.popUpCard, {
-  handleFormSubmit: (dataForm) => {
-    formCard.handleButtonForm("Загрузка...");
-    api
-      .postCard(dataForm["input-name-card"], dataForm["input-link-card"])
-      .then(handleData)
-      .catch((err) => console.log(err));
-  },
-});
-formCard.setEventListeners(selectors.popUpCloseIcon);
 
 Promise.all([api.getInitialCards(), api.getUserData()])
   .then((result) => {
