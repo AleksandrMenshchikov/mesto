@@ -37,11 +37,12 @@
 .elements__image{cursor:pointer;border-top-left-radius:10px;border-top-right-radius:10px;width:100%;height:282px;background-position:50%;background-size:cover}
 .elements__item-title{font-family:Inter,Arial,Helvetica,sans-serif;font-style:normal;font-weight:900;font-size:24px;line-height:29px;color:#000;margin:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .elements__item-bottom{background-color:#fff;margin:0;display:flex;align-items:center;justify-content:space-between;padding:25px 20px;border-bottom-left-radius:10px;border-bottom-right-radius:10px}
-.elements__like{outline:none;border:none;display:block;cursor:pointer;background-image:url(./images/like.svg);background-repeat:no-repeat;background-position:50%;min-width:21px;height:20px;background-color:transparent;transition:opacity .2s ease-in-out}.elements__like:hover{opacity:.6}
+.elements__like{outline:none;border:none;display:block;cursor:pointer;background-image:url(./images/like.svg);background-repeat:no-repeat;background-position:50%;min-width:21px;height:20px;background-color:transparent;transition:opacity .2s ease-in-out}.elements__like:hover{opacity:.6}.elements__like:hover+.elements__like-message{opacity:1;visibility:visible}
 .elements__remove{cursor:pointer;outline:none;padding:0;border:0;position:absolute;top:15px;right:12px;width:25px;height:25px;background-color:transparent;background-image:url(./images/remove-icon.svg);background-repeat:no-repeat;background-position:50%;transition:opacity .3s ease-in-out;display:none}.elements__remove:hover{opacity:.7}
 .elements__remove_active{display:block}
-.elements__like-container{display:flex;flex-direction:column;align-items:center;margin-left:19px}
+.elements__like-container{display:flex;flex-direction:column;align-items:center;margin-left:19px;position:relative}
 .elements__like-counter{font-family:Inter,Arial,Helvetica,sans-serif;font-style:normal;font-weight:400;font-size:13px;line-height:16px;color:#000;margin-top:2px}
+.elements__like-message{position:absolute;min-width:200px;background-color:rgba(0,0,0,.9);top:2px;left:32px;z-index:1;opacity:.98;border-radius:5px;padding:10px;pointer-events:none;box-shadow:3px 3px 4px rgba(0,0,0,.9);visibility:hidden;opacity:0;transition:all .2s;color:#fff;font-family:Inter,Arial,Helvetica,sans-serif;font-weight:500;font-style:normal;font-size:13px}.elements__like-message:after{position:absolute;content:"";width:0;height:0;border-top:15px solid rgba(0,0,0,.9);border-left:20px solid transparent;top:5px;left:-20px;opacity:.98}@media screen and (max-width:1320px){.elements__like-message{display:none}}
 
 .elements__like_active{background-image:url(./images/like-black.svg)}
 .footer__copyright{font-family:Inter,Arial,Helvetica,sans-serif;font-style:normal;font-weight:400;font-size:18px;line-height:1.2;color:#545454;margin:0}@media screen and (max-width:425px){.footer__copyright{font-size:14px}}
