@@ -15,3 +15,8 @@
 .elements__like:hover {
   opacity: 0.6;
 }
+
+.elements__like:hover + .elements__like-message {
+  opacity: 1;
+  visibility: visible;
+}

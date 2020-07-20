@@ -86,6 +86,13 @@ const formCard = new PopupWithForm(selectors.popUpCard, {
 });
 formCard.setEventListeners(selectors.popUpCloseIcon);
 
+const getPeopleLikes = (arrayData) => {
+  return arrayData.reduce((acc, item) => {
+    acc.push(item.name);
+    return acc;
+  }, []);
+};
+
 const cardList = new Section(selectors.elementsList);
 
 const handleData = (data) => {
@@ -123,8 +130,7 @@ const handleData = (data) => {
     },
   });
   const cardElement = card.generateCard(data.owner._id);
-  cardElement.querySelector(".elements__like-counter ").textContent =
-    data.likes.length;
+  card.setLikes(data.likes);
   cardList.appendItem(cardElement);
   formCard.close();
 };

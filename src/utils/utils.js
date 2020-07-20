@@ -23,6 +23,7 @@ export const selectors = {
   elementsList: ".elements__list",
   elementsImage: ".elements__image",
   elementsItemTitle: ".elements__item-title",
+  elementsLikeMessage: ".elements__like-message",
   elementsLikeCounter: ".elements__like-counter",
   popUpImageImg: ".pop-up-image__img",
   popUpImageDescription: ".pop-up-image__description",

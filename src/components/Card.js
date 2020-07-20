@@ -33,6 +33,9 @@ export default class Card {
     this._elementLikeCounter = this._element.querySelector(
       selectors.elementsLikeCounter
     );
+    this._elementLikeMessage = this._element.querySelector(
+      selectors.elementsLikeMessage
+    );
     this._elementRemove = this._element.querySelector(selectors.elementsRemove);
     if (id === "668ea0a7f8f07344312fc2a6") {
       this._elementRemove.classList.add("elements__remove_active");
@@ -77,6 +80,17 @@ export default class Card {
 
   setLikes(arrLikes) {
     this._elementLikeCounter.textContent = arrLikes.length;
+    this._elementLikeCounter.dataset.people = arrLikes
+      .reduce((acc, item) => {
+        acc.push(item.name);
+        return acc;
+      }, [])
+      .join(", ");
+    arrLikes.length > 0
+      ? (this._elementLikeMessage.textContent =
+          "Нравится: " + this._elementLikeCounter.dataset.people)
+      : (this._elementLikeMessage.textContent =
+          "Это место пока никто не оценил...😒");
   }
 
   getElementLike() {
