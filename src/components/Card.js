@@ -17,6 +17,7 @@ export default class Card {
     this._handleButtonRemove = this._handleButtonRemove.bind(this);
     this._handleButtonLike = handleButtonLike;
     this._handleButtonLike = this._handleButtonLike.bind(this);
+    this._handleMouseOverLike = this._handleMouseOverLike.bind(this);
   }
 
   _getTemplate() {
@@ -62,6 +63,7 @@ export default class Card {
 
   _removeEventListeners() {
     this._elementLike.removeEventListener("click", this._handleButtonLike);
+    this._elementLike.removeEventListener("mouseover", this._handleMouseOverLike);
     this._elementRemove.removeEventListener("click", this._handleButtonRemove);
     this._elementImage.removeEventListener("click", this._handleCardClick);
   }
@@ -93,12 +95,23 @@ export default class Card {
           "Это место пока никто не оценил...😒");
   }
 
+  _handleMouseOverLike() {
+    if (this._elementLikeCounter.dataset.people) {
+      this._elementLikeMessage.textContent =
+        "Нравится: " + this._elementLikeCounter.dataset.people;
+    } else {
+      this._elementLikeMessage.textContent =
+        "Это место пока никто не оценил...😒";
+    }
+  }
+
   getElementLike() {
     return this._elementLike;
   }
 
   _setEventListeners() {
     this._elementLike.addEventListener("click", this._handleButtonLike);
+    this._elementLike.addEventListener("mouseover", this._handleMouseOverLike);
     this._elementRemove.addEventListener("click", this._handleButtonRemove);
     this._elementImage.addEventListener("click", this._handleCardClick);
   }

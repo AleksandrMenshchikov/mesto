@@ -60,6 +60,7 @@ popupWithAvatar.setEventListeners(selectors.popUpCloseIcon);
 
 const formProfile = new PopupWithForm(selectors.popUpProfile, {
   handleFormSubmit: (dataForm) => {
+    const oldValues = userInfo.getUserInfo();
     formProfile.handleButtonForm("Загрузка...");
     api
       .patchUserData(dataForm["input-name"], dataForm["input-profession"])
@@ -69,6 +70,17 @@ const formProfile = new PopupWithForm(selectors.popUpProfile, {
           dataForm["input-profession"]
         );
         formProfile.close();
+        const dataPeople = document.querySelectorAll("[data-people]");
+        dataPeople.forEach((item) => {
+          const newMap = item.dataset.people.split(", ").map((item) => {
+            if (item === oldValues.user) {
+              item = userInfo.getUserInfo().user;
+            }
+            return item;
+          });
+          const newString = newMap.join(", ");
+          item.dataset.people = newString;
+        });
       })
       .catch((err) => console.log(err));
   },
